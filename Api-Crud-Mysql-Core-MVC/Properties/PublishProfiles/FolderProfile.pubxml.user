@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\inetpub\wwwroot\api-crud-mysql-core-mvc-json</_PublishTargetUrl>
+    <History>True|2022-02-09T11:34:19.0023629Z;False|2022-02-09T08:34:11.7405772-03:00;True|2022-02-09T08:14:51.1894884-03:00;True|2022-02-09T08:02:53.6566436-03:00;True|2022-02-09T07:32:03.3646068-03:00;True|2022-02-08T01:43:19.1953334-03:00;False|2022-02-08T01:43:06.0777932-03:00;True|2022-02-07T23:55:22.0591159-03:00;False|2022-02-07T23:55:08.3771901-03:00;True|2022-02-07T23:48:24.0635570-03:00;False|2022-02-07T23:48:08.0335716-03:00;True|2022-02-07T22:06:05.0903360-03:00;True|2022-02-07T06:23:32.2475691-03:00;True|2022-02-07T06:23:25.7719877-03:00;True|2022-02-07T05:46:46.1875951-03:00;</History>
+  </PropertyGroup>
+</Project>
