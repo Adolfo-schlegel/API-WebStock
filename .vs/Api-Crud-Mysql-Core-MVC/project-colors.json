@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "f12a4e98-5e17-4e33-96b0-69fd6054f079": {
+      "ProjectGuid": "f12a4e98-5e17-4e33-96b0-69fd6054f079",
+      "DisplayName": "Api-Crud-Mysql-Core-MVC",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}

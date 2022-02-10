@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using MySql.Data.MySqlClient;
 
-namespace Api_crud_mysql_core.SQL
+namespace Api_Crud_Mysql_Core_MVC.SQL
 {  
     public class CtrlLogin : ConnectionMysql.ConnectionToStocksWeb
     {

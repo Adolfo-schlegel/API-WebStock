@@ -1,4 +1,4 @@
-﻿namespace Api_crud_mysql_core.Models
+﻿namespace Api_Crud_Mysql_Core_MVC.Models
 {
     public class Register
     {

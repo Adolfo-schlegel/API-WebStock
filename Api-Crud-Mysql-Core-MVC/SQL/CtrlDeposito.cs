@@ -1,6 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 
-namespace Api_crud_mysql_core.SQL
+namespace Api_Crud_Mysql_Core_MVC.SQL
 {
     public class CtrlDeposito : ConnectionMysql.ConnectionToStock
     {

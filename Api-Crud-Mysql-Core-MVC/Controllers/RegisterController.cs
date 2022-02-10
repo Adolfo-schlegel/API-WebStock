@@ -1,7 +1,7 @@
-﻿using Api_crud_mysql_core.SQL;
+﻿using Api_Crud_Mysql_Core_MVC.SQL;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Api_crud_mysql_core.Controllers
+namespace Api_Crud_Mysql_Core_MVC.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
