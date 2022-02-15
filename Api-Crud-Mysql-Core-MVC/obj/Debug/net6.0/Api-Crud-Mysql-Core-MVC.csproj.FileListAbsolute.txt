@@ -44,3 +44,10 @@ C:\Users\adolf\source\repos\Api-Crud-Mysql-Core-MVC\Api-Crud-Mysql-Core-MVC\obj\
 C:\Users\adolf\source\repos\Api-Crud-Mysql-Core-MVC\Api-Crud-Mysql-Core-MVC\obj\Debug\net6.0\ref\Api-Crud-Mysql-Core-MVC.dll
 C:\Users\adolf\source\repos\Api-Crud-Mysql-Core-MVC\Api-Crud-Mysql-Core-MVC\obj\Debug\net6.0\Api-Crud-Mysql-Core-MVC.pdb
 C:\Users\adolf\source\repos\Api-Crud-Mysql-Core-MVC\Api-Crud-Mysql-Core-MVC\obj\Debug\net6.0\Api-Crud-Mysql-Core-MVC.genruntimeconfig.cache
+C:\Users\adolf\source\repos\Api-Crud-Mysql-Core-MVC\Api-Crud-Mysql-Core-MVC\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\adolf\source\repos\Api-Crud-Mysql-Core-MVC\Api-Crud-Mysql-Core-MVC\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\adolf\source\repos\Api-Crud-Mysql-Core-MVC\Api-Crud-Mysql-Core-MVC\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\adolf\source\repos\Api-Crud-Mysql-Core-MVC\Api-Crud-Mysql-Core-MVC\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\adolf\source\repos\Api-Crud-Mysql-Core-MVC\Api-Crud-Mysql-Core-MVC\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\adolf\source\repos\Api-Crud-Mysql-Core-MVC\Api-Crud-Mysql-Core-MVC\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\adolf\source\repos\Api-Crud-Mysql-Core-MVC\Api-Crud-Mysql-Core-MVC\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll

@@ -1,19 +1,19 @@
 ﻿using MySql.Data.MySqlClient;
-
+using Api_Crud_Mysql_Core_MVC.Models;
 namespace Api_Crud_Mysql_Core_MVC.SQL
 {
     public class CtrlStockUser :ConnectionMysql.ConnectionToStocksWeb
     {
-        public List<object> Get(int id_user)
+        public List<object> Get(StockUser model)
         {
             try
             {
                 string query;
                 List<object> lista = new List<object>();
                 MySqlConnection connection = connect();
-                MySqlDataReader reader = null;
+                MySqlDataReader? reader = null;
 
-                query = "SELECT id_stock, nombre, marca, modelo, tipo, area, cantidad, estado, id_user FROM stock WHERE id_user = '" + id_user + "';";
+                query = "SELECT id_stock, nombre, marca, modelo, tipo, area, cantidad, estado, id_user, token FROM stock join users on id_user = user_id WHERE user_id = '" + model.Id_user + "';";
 
                 MySqlCommand command1 = new MySqlCommand(query, connection);
 
@@ -39,13 +39,13 @@ namespace Api_Crud_Mysql_Core_MVC.SQL
 
                 return lista;
             }
-            catch
+            catch(Exception ex)
             {
                 return null;
             }
         }
 
-        public bool Post(Models.StockUser stock)
+        public int Post(Models.StockUser stock)
         {
             try
             {
@@ -61,13 +61,14 @@ namespace Api_Crud_Mysql_Core_MVC.SQL
 
                 mySqlConnection.Close();
 
-                return true;
+                return 1;
             }
             catch (MySqlException ex)
             {
                 Console.WriteLine(ex);
+
+                return 0;
             }
-            return false;
         }
     }
 }

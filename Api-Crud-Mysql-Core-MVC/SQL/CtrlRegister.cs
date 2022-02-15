@@ -12,7 +12,7 @@ namespace Api_Crud_Mysql_Core_MVC.SQL
 
                 MySqlConnection mySqlConnection = connect();
 
-                query = "INSERT INTO Users (Email, Password) VALUES ('" + register.Email + "','" + register.Password + "');";
+                query = "INSERT INTO Users (Email, Password, idEstatus) VALUES ('" + register.Email + "','" + register.Password + "','" + 1 + "');";
 
                 MySqlCommand mySqlCommand = new MySqlCommand(query, mySqlConnection);
 

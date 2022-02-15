@@ -9,7 +9,7 @@ namespace ConnectionMysql
 {
     public class ConnectionToStocksWeb
     {
-        public MySqlConnection connect()
+        public static MySqlConnection connect()
         {
             try
             {

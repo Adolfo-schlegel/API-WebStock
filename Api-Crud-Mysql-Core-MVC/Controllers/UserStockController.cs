@@ -1,53 +1,65 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Api_Crud_Mysql_Core_MVC.SQL;
-
+using Api_Crud_Mysql_Core_MVC.Models;
 namespace Api_Crud_Mysql_Core_MVC.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class UserStockController : Controller
+    public class UserStockController : BaseController
     {
         CtrlStockUser stockUser = new CtrlStockUser();
 
-        [Route("")]
-        [Route("UserStock")]
-        [Route("UserStock/Index")]
-        public IActionResult Index()
+        [HttpPost]
+        [Route("Stock")]
+        public Reply Get([FromBody] StockUser? model)
         {
-            return View();
+            Reply oR = new Reply();
+            oR.result = 0;
+
+            if (!Verify(model.token))
+            {
+                oR.message = "No autorizado";
+                return oR;
+            }
+
+            try
+            {
+                oR.data = stockUser.Get(model).ToList();
+                oR.result = 1;
+            }
+            catch (Exception ex)
+            {
+                return oR;
+            }
+
+            return oR;
         }
 
-        // GET api/stock/values
-        [HttpGet("list/{id}")]
-        public ActionResult Get(int id)
-        {            
-            var lst = stockUser.Get(id).ToList();
-
-            return Ok(lst);
-        }
-
-        // GET api/stock/5
         [HttpGet("{id}")]
         public ActionResult Get_id(int id)
         {
-
-
-
-
-
             return null;
         }
 
-        // POST api/values
         [HttpPost]
-        public bool Post([FromBody] Models.StockUser stock)
+        [Route("AddStock")]
+        public Reply Add([FromBody] Models.StockUser stock)
         {
-            bool result = stockUser.Post(stock);
+            Reply oR = new Reply();
+            oR.result = 0;
 
-            return result;
+            try
+            {
+                oR.result = stockUser.Post(stock);
+            }
+            catch(Exception ex)
+            {
+                oR.message = "Ocurrio un problema en el servidor, estamos reparandolo";
+            }        
+            
+            return oR;
         }
 
-        // PUT api/values/5
         [HttpPut]
         public ActionResult Put([FromBody] Models.StockUser stockUser)
         {
@@ -58,7 +70,6 @@ namespace Api_Crud_Mysql_Core_MVC.Controllers
             return Ok(true);
         }
 
-        // DELETE api/values/5
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {

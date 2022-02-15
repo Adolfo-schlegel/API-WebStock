@@ -1,6 +1,6 @@
 ﻿namespace Api_Crud_Mysql_Core_MVC.Models
 {
-    public class StockUser
+    public class StockUser : SecurityModel
     {
         int id;
         string nombre;

@@ -1,49 +1,87 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
+using Api_Crud_Mysql_Core_MVC.Models.Common;
+using Api_Crud_Mysql_Core_MVC.Models;
+using Microsoft.Extensions.Options;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
+using Api_Crud_Mysql_Core_MVC.SQL.Interfaces;
 
 namespace Api_Crud_Mysql_Core_MVC.SQL
 {  
-    public class CtrlLogin : ConnectionMysql.ConnectionToStocksWeb
+    public class CtrlLogin : ConnectionMysql.ConnectionToStocksWeb, ILogin
     {
-        public int Validate_User(Models.Login login)
+        MySqlCommand? mySqlCommand;
+        string? query;
+        MySqlConnection mySqlConnection = connect();
+        MySqlDataReader? reader;
+
+        private readonly AppSettings? _appSettings;//sirve para obtener el secreto, para obtener el token 
+
+        public CtrlLogin(IOptions<AppSettings> appSettings)
         {
+            _appSettings = appSettings.Value;
+        }
+
+        public Reply Validate_User(Models.Login login)
+        {           
+            Reply oR = new Reply();
             try
             {
-                string query;
-                List<int> list = new List<int>();
-                MySqlConnection mySqlConnection = connect();
-                MySqlDataReader reader;
-                query = "SELECT id_user FROM users WHERE Email = '" + login.Email + "' and Password = '" + login.Password + "';";
+                
+                query = "SELECT id_user FROM users WHERE Email = '" + login.Email + "' and Password = '" + login.Password +"' and idEstatus = '"+ 1 +"' ;";
 
-                MySqlCommand mySqlCommand = new MySqlCommand(query, mySqlConnection);
+                mySqlCommand = new MySqlCommand(query, mySqlConnection);
 
                 reader = mySqlCommand.ExecuteReader();           
                
                 if(reader.HasRows)
                 {
-                    while (reader.Read())
+                    while(reader.Read())
                     {
-                        Models.Login login1 = new Models.Login();
-
-                        login1.Id = Convert.ToInt32(reader.GetString(0));
-
-                        list.Add(login1.Id);
+                        login.Id = reader.GetInt32(0); 
                     }
-                    return list[0];
+
+                    oR.result = 1;
+                    oR.data = GetToken(login);
+                    oR.message = "OK";
                 }
                 else
                 {
-                    return 0;
+                     oR.message = "Datos incorrectos";
                 }                                       
             }
-            catch (MySqlException ex)
+            catch (Exception)
             {
-                Console.WriteLine(ex.Message);
+                oR.message = "Ocurrio un error, estamos trabajando en ello :)";
             }
-            return 0;
+
+            return oR;
+        }
+
+        private  string GetToken(Login model)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var llave = Encoding.ASCII.GetBytes(_appSettings.Secreto);
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new System.Security.Claims.ClaimsIdentity
+                (
+                    new Claim[]
+                    {
+                        new Claim(ClaimTypes.NameIdentifier, model.Id.ToString()),
+                        new Claim(ClaimTypes.NameIdentifier, model.Email.ToString()),
+                    }
+                ),
+
+                Expires = DateTime.UtcNow.AddDays(60),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(llave), SecurityAlgorithms.HmacSha256Signature)
+            };
+
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+
+            return tokenHandler.WriteToken(token);
         }
     }   
 }

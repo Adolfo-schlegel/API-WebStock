@@ -1,5 +1,8 @@
-﻿using Api_Crud_Mysql_Core_MVC.SQL;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Api_Crud_Mysql_Core_MVC.Models;
+using Api_Crud_Mysql_Core_MVC.SQL.Interfaces;
+using System.Web;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Api_Crud_Mysql_Core_MVC.Controllers
 {
@@ -7,38 +10,75 @@ namespace Api_Crud_Mysql_Core_MVC.Controllers
     [Route("api/[controller]")]
     public class LoginController : Controller
     {
-        CtrlLogin CtrlLogin = new CtrlLogin();
+        private ILogin _login;
+        public LoginController (ILogin login)
+        {
+            _login = login;
+        }
 
-        // GET api/<controller>
+        
         [HttpGet]
-        public IEnumerable<string> Get()
+        [Route("GetUsers")]
+        [Authorize]
+        public Reply GetAll()
         {
-            return new string[] { "value1", "value2" };
+            Reply oR = new Reply();
+
+            oR.message = "OK";
+            oR.data = "lista";
+            oR.result = 1;
+
+            return oR;
         }
 
-        // GET api/<controller>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        [Route("GetUsersById")]
+        [Authorize]
+        public Reply GetById(int id)
         {
-            return "value";
+            Reply reply = new Reply();
+
+            //here code
+
+            return reply;
         }
 
-        // POST api/<controller>
         [HttpPost]
-        public int Post([FromBody] Models.Login login)
+        [Route("Auth")]
+        [AllowAnonymous]
+        public Reply Login([FromBody] Login model)
         {
-           return CtrlLogin.Validate_User(login);  
+
+            Reply oR = new Reply();
+           
+            oR = _login.Validate_User(model);
+
+            return oR;
+
         }
 
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        [Route("ModifyUser")]
+        [Authorize]
+        public Reply Put(int id, [FromBody] Login model)
         {
-        }
+            Reply reply = new Reply();
 
-        // DELETE api/<controller>/5
+            //here code
+
+            return reply;
+        }
+        
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        [Route("DeleteUser")]
+        [Authorize]
+        public Reply Delete(int id)
         {
+            Reply reply = new Reply();
+
+            //here code
+
+            return reply;
         }
     }
 }
