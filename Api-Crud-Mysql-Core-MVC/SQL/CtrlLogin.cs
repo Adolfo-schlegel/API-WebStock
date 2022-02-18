@@ -75,8 +75,8 @@ namespace Api_Crud_Mysql_Core_MVC.SQL
                     }
                 ),
 
-                Expires = DateTime.UtcNow.AddDays(60),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(llave), SecurityAlgorithms.HmacSha256Signature)
+                Expires = DateTime.UtcNow.AddDays(1),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(llave), SecurityAlgorithms.HmacSha256)
             };
 
             var token = tokenHandler.CreateToken(tokenDescriptor);

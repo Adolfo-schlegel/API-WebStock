@@ -1,6 +1,6 @@
 ﻿namespace Api_Crud_Mysql_Core_MVC.Models
 {
-    public class StockUser : SecurityModel
+    public class StockUser : User
     {
         int id;
         string nombre;
@@ -11,6 +11,7 @@
         int cantidad;
         string estado;
         int id_user;
+     
         public int Id { get => id; set => id = value; }
         public string Nombre { get => nombre; set => nombre = value; }
         public string Marca { get => marca; set => marca = value; }

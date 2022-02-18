@@ -14,8 +14,7 @@ namespace Api_Crud_Mysql_Core_MVC.Controllers
         public LoginController (ILogin login)
         {
             _login = login;
-        }
-
+        }        
         
         [HttpGet]
         [Route("GetUsers")]

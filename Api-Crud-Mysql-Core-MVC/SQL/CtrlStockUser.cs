@@ -4,45 +4,38 @@ namespace Api_Crud_Mysql_Core_MVC.SQL
 {
     public class CtrlStockUser :ConnectionMysql.ConnectionToStocksWeb
     {
-        public List<object> Get(StockUser model)
+        public List<object> Get(User model)
         {
-            try
-            {
-                string query;
-                List<object> lista = new List<object>();
-                MySqlConnection connection = connect();
-                MySqlDataReader? reader = null;
+             string query;
+             List<object> lista = new List<object>();
+             MySqlConnection connection = connect();
+             MySqlDataReader? reader = null;
 
-                query = "SELECT id_stock, nombre, marca, modelo, tipo, area, cantidad, estado, id_user, token FROM stock join users on id_user = user_id WHERE user_id = '" + model.Id_user + "';";
+             query = "SELECT id_stock, nombre, marca, modelo, tipo, area, cantidad, estado, id_user FROM stock join users on id_user = user_id WHERE user_id = '" +model.user_id + "';";
 
-                MySqlCommand command1 = new MySqlCommand(query, connection);
+             MySqlCommand command1 = new MySqlCommand(query, connection);
 
-                reader = command1.ExecuteReader();
+             reader = command1.ExecuteReader();
 
-                while (reader.Read())
-                {
-                    Models.StockUser stockUser = new Models.StockUser();
+             while (reader.Read())
+             {
+                 Models.StockUser stockUser = new Models.StockUser();
 
-                    stockUser.Id = Convert.ToInt32(reader.GetString(0));
-                    stockUser.Nombre = reader.GetString(1);
-                    stockUser.Marca = reader.GetString(2);
-                    stockUser.Modelo = reader.GetString(3);
-                    stockUser.Tipo = reader.GetString(4);
-                    stockUser.Area = reader.GetString(5);
-                    stockUser.Cantidad = Convert.ToInt32(reader.GetString(6));
-                    stockUser.Estado = reader.GetString(7);
-                    stockUser.Id_user = Convert.ToInt32(reader.GetString(8));
+                 stockUser.Id = Convert.ToInt32(reader.GetString(0));
+                 stockUser.Nombre = reader.GetString(1);
+                 stockUser.Marca = reader.GetString(2);
+                 stockUser.Modelo = reader.GetString(3);
+                 stockUser.Tipo = reader.GetString(4);
+                 stockUser.Area = reader.GetString(5);
+                 stockUser.Cantidad = Convert.ToInt32(reader.GetString(6));
+                 stockUser.Estado = reader.GetString(7);
+                 stockUser.Id_user = Convert.ToInt32(reader.GetString(8));
 
-                    lista.Add(stockUser);
-                }
-                connection.Close();
+                 lista.Add(stockUser);
+             }
+             connection.Close();
 
-                return lista;
-            }
-            catch(Exception ex)
-            {
-                return null;
-            }
+             return lista;
         }
 
         public int Post(Models.StockUser stock)

@@ -23,15 +23,15 @@ builder.Services.Configure<AppSettings>(appAppSettingsSection);
 var appSettings = appAppSettingsSection.Get<AppSettings>();
 var llave = Encoding.ASCII.GetBytes(appSettings.Secreto);
 
-builder.Services.AddAuthentication(d => {
-    d.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    d.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+builder.Services.AddAuthentication(option => {
+    option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 
 })
-    .AddJwtBearer(d => {
-        d.RequireHttpsMetadata = false;
-        d.SaveToken = true;
-        d.TokenValidationParameters = new TokenValidationParameters
+    .AddJwtBearer(option => {
+        option.RequireHttpsMetadata = false;
+        option.SaveToken = true;
+        option.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuerSigningKey = true,
             IssuerSigningKey = new SymmetricSecurityKey(llave),
