@@ -9,23 +9,26 @@ namespace Api_Crud_Mysql_Core_MVC.Controllers
     [Route("api/[controller]")]
     public class UserStockController : BaseController
     {
-        CtrlStockUser stockUser = new CtrlStockUser();
+        CtrlStockUser StockUserSQL = new CtrlStockUser();
 
         [HttpPost]
         [Route("Stock")]
-        public Reply Get([FromBody] User model)
+        public Reply GetStock([FromBody] User model)
         {
             Reply oR = new Reply();
-            oR.result = 0;
-            oR.message = "Error en el servidor";
+            
             try
             {
                 oR.message = "OK";
-                oR.data = stockUser.Get(model).ToList();
+                oR.data = StockUserSQL.Get(model).ToList();
                 oR.result = 1;
+
             }
-            catch (Exception ex)
+            catch (Exception)
             {
+                oR.result = 0;
+                oR.message = "Error en el servidor";
+
                 return oR;
             }
 
@@ -33,23 +36,41 @@ namespace Api_Crud_Mysql_Core_MVC.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult Get_id(int id)
+        [Route("GetStockId")]
+        public Reply Get_id(int id)
         {
-            return null;
+            Reply oR = new Reply();
+
+            try
+            {
+
+            }
+            catch
+            {
+                oR.message = "Ocurrio un problema en el servidor, estamos reparandolo";
+            }
+
+            return oR;
         }
 
         [HttpPost]
-        [Route("AddStock")]
-        public Reply Add([FromBody] Models.StockUser stock)
+        [Route("AddStock")]        
+        public Reply Add([FromBody] StockUser stock)
         {
             Reply oR = new Reply();
             oR.result = 0;
 
             try
             {
-                oR.result = stockUser.Post(stock);
+                oR.message="OK";
+                oR.result = StockUserSQL.Post(stock);
+
+                if(oR.result != 1)
+                {
+                    oR.message = "mysql error";
+                }
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 oR.message = "Ocurrio un problema en el servidor, estamos reparandolo";
             }        
@@ -58,22 +79,46 @@ namespace Api_Crud_Mysql_Core_MVC.Controllers
         }
 
         [HttpPut]
-        public ActionResult Put([FromBody] Models.StockUser stockUser)
+        [Route("ModifyStock")]
+        public Reply Put([FromBody] Models.StockUser stockUser)
         {
+            Reply oR = new Reply();
 
+            try
+            {
 
+            }
+            catch
+            {
+                oR.message = "Ocurrio un problema en el servidor, estamos reparandolo";
+            }
 
-
-            return Ok(true);
+            return oR;
         }
 
-        [HttpDelete("{id}")]
-        public ActionResult Delete(int id)
+        
+        [HttpDelete("DeleteStock/{id}")]
+        public Reply Delete(int id)
         {
+            Reply oR = new Reply();
+
+            try
+            {
+                oR.result = StockUserSQL.Delete(id);
+                oR.message = "OK";
+
+                if (oR.result != 1)
+                {
+                    oR.message = "mysql error";
+                }
+            }
+            catch
+            {
+                oR.message = "Ocurrio un problema en el servidor, estamos reparandolo";
+            }
 
 
-
-            return Ok(true);
+            return oR;
         }
     }
 }

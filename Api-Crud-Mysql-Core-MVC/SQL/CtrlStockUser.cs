@@ -19,7 +19,7 @@ namespace Api_Crud_Mysql_Core_MVC.SQL
 
              while (reader.Read())
              {
-                 Models.StockUser stockUser = new Models.StockUser();
+                 StockUser stockUser = new StockUser();
 
                  stockUser.Id = Convert.ToInt32(reader.GetString(0));
                  stockUser.Nombre = reader.GetString(1);
@@ -29,7 +29,7 @@ namespace Api_Crud_Mysql_Core_MVC.SQL
                  stockUser.Area = reader.GetString(5);
                  stockUser.Cantidad = Convert.ToInt32(reader.GetString(6));
                  stockUser.Estado = reader.GetString(7);
-                 stockUser.Id_user = Convert.ToInt32(reader.GetString(8));
+                 stockUser.user_id = Convert.ToInt32(reader.GetString(8));
 
                  lista.Add(stockUser);
              }
@@ -38,7 +38,7 @@ namespace Api_Crud_Mysql_Core_MVC.SQL
              return lista;
         }
 
-        public int Post(Models.StockUser stock)
+        public int Post(StockUser stock)
         {
             try
             {
@@ -46,7 +46,7 @@ namespace Api_Crud_Mysql_Core_MVC.SQL
 
                 MySqlConnection mySqlConnection = connect();
 
-                query = "INSERT INTO stock (nombre,marca,modelo,tipo,cantidad,estado,area,id_user) VALUES ('" + stock.Nombre + "','" + stock.Marca + "','" + stock.Modelo + "','" + stock.Tipo + "','" + Convert.ToInt32(stock.Cantidad) + "','" + stock.Estado + "','" + stock.Area +"','"+  stock.Id_user+ "');";
+                query = "INSERT INTO stock (nombre,marca,modelo,tipo,cantidad,estado,area,user_id) VALUES ('" + stock.Nombre + "','" + stock.Marca + "','" + stock.Modelo + "','" + stock.Tipo + "','" + Convert.ToInt32(stock.Cantidad) + "','" + stock.Estado + "','" + stock.Area +"','"+  stock.user_id+ "');";
 
                 MySqlCommand mySqlCommand = new MySqlCommand(query, mySqlConnection);
 
@@ -56,10 +56,30 @@ namespace Api_Crud_Mysql_Core_MVC.SQL
 
                 return 1;
             }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine(ex);
+            catch (MySqlException)
+            {                
+                return 0;
+            }
+        }
 
+        public int Delete(int id_stock)
+        {
+            try
+            {
+                string query = "DELETE FROM stock WHERE id_stock = '" + id_stock + "';";
+
+                MySqlConnection mySqlConnection = connect();
+
+                MySqlCommand mySqlCommand = new MySqlCommand(query, mySqlConnection);
+
+                mySqlCommand.ExecuteNonQuery();
+
+                mySqlConnection.Close();
+
+                return 1;
+            }
+            catch(MySqlException)
+            {
                 return 0;
             }
         }

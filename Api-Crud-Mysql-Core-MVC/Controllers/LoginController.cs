@@ -11,6 +11,7 @@ namespace Api_Crud_Mysql_Core_MVC.Controllers
     public class LoginController : Controller
     {
         private ILogin _login;
+
         public LoginController (ILogin login)
         {
             _login = login;
@@ -49,7 +50,7 @@ namespace Api_Crud_Mysql_Core_MVC.Controllers
         {
 
             Reply oR = new Reply();
-           
+
             oR = _login.Validate_User(model);
 
             return oR;

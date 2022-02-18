@@ -10,7 +10,6 @@
         string area;
         int cantidad;
         string estado;
-        int id_user;
      
         public int Id { get => id; set => id = value; }
         public string Nombre { get => nombre; set => nombre = value; }
@@ -20,6 +19,5 @@
         public string Area { get => area; set => area = value; }
         public int Cantidad { get => cantidad; set => cantidad = value; }
         public string Estado { get => estado; set => estado = value; }
-        public int Id_user { get => id_user; set => id_user = value; }
     }
 }

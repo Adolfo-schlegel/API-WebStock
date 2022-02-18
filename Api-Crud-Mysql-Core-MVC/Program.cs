@@ -11,8 +11,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
-builder.Services.AddScoped<ILogin, CtrlLogin>();//inyecto mi dependencia 
+                             
+builder.Services.AddScoped<ILogin, CtrlLogin>();//inyecto mi dependencia para verificar mi correo y contraseña
+builder.Services.AddScoped<IAuth, Auth>();//inyecto mi dependencia para autentificarme, la cual me retorna un token
 
 //configuracion de clase
 var appAppSettingsSection = builder.Configuration.GetSection("AppSettings");
