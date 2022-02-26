@@ -31,18 +31,6 @@ namespace Api_Crud_Mysql_Core_MVC.Controllers
             return oR;
         }
 
-        [HttpGet("{id}")]
-        [Route("GetUsersById")]
-        [Authorize]
-        public Reply GetById(int id)
-        {
-            Reply reply = new Reply();
-
-            //here code
-
-            return reply;
-        }
-
         [HttpPost]
         [Route("Auth")]
         [AllowAnonymous]
@@ -55,30 +43,6 @@ namespace Api_Crud_Mysql_Core_MVC.Controllers
 
             return oR;
 
-        }
-
-        [HttpPut]
-        [Route("ModifyUser")]
-        [Authorize]
-        public Reply Put(int id, [FromBody] Login model)
-        {
-            Reply reply = new Reply();
-
-            //here code
-
-            return reply;
-        }
-        
-        [HttpDelete("{id}")]
-        [Route("DeleteUser")]
-        [Authorize]
-        public Reply Delete(int id)
-        {
-            Reply reply = new Reply();
-
-            //here code
-
-            return reply;
-        }
+        }        
     }
 }

@@ -1,8 +1,10 @@
 ﻿using MySql.Data.MySqlClient;
 using Api_Crud_Mysql_Core_MVC.Models;
+using Api_Crud_Mysql_Core_MVC.SQL.Interfaces;
+
 namespace Api_Crud_Mysql_Core_MVC.SQL
 {
-    public class CtrlStockUser :ConnectionMysql.ConnectionToStocksWeb
+    public class CtrlStockUser :ConnectionMysql.ConnectionToStocksWeb, IStockUser
     {
         public List<object> Get(User model)
         {
@@ -80,6 +82,64 @@ namespace Api_Crud_Mysql_Core_MVC.SQL
             }
             catch(MySqlException)
             {
+                return 0;
+            }
+        }
+
+        public List<StockUser> GetById(int id_stock)
+        {
+            string query;
+            List<StockUser> lista = new List<StockUser>();
+            MySqlConnection connection = connect();
+            MySqlDataReader? reader = null;
+
+            query = "SELECT id_stock, nombre, marca, modelo, tipo, area, cantidad, estado, user_id FROM stock WHERE id_stock = '" + id_stock + "';";
+
+            MySqlCommand command1 = new MySqlCommand(query, connection);
+
+            reader = command1.ExecuteReader();
+
+            while (reader.Read())
+            {
+                StockUser stockUser = new StockUser();
+
+                stockUser.Id = Convert.ToInt32(reader.GetString(0));
+                stockUser.Nombre = reader.GetString(1);
+                stockUser.Marca = reader.GetString(2);
+                stockUser.Modelo = reader.GetString(3);
+                stockUser.Tipo = reader.GetString(4);
+                stockUser.Area = reader.GetString(5);
+                stockUser.Cantidad = Convert.ToInt32(reader.GetString(6));
+                stockUser.Estado = reader.GetString(7);
+                stockUser.user_id = Convert.ToInt32(reader.GetString(8));
+
+                lista.Add(stockUser);
+            }
+            connection.Close();
+
+            return lista;
+        }
+
+        public int Put(StockUser model)
+        {
+            try
+            {
+                string query = "UPDATE stock SET nombre = '" + model.Nombre + "', marca = '" + model.Marca + "', tipo = '" + model.Tipo + "', modelo = '" + model.Modelo + "', cantidad= '" + model.Cantidad + "', estado= '" + model.Estado + "', area  = '" + model.Area + "' WHERE id_stock = '" + model.Id + "';";
+
+                MySqlConnection mySqlConnection = connect();
+
+                MySqlCommand mySqlCommand = new MySqlCommand(query, mySqlConnection);
+
+                mySqlCommand.ExecuteNonQuery();
+
+                mySqlConnection.Close();
+
+                return 1;
+
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("ERROR :" + ex);
                 return 0;
             }
         }

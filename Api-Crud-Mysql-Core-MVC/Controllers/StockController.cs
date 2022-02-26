@@ -1,5 +1,6 @@
 ﻿using Api_Crud_Mysql_Core_MVC.SQL;
 using Microsoft.AspNetCore.Mvc;
+using Api_Crud_Mysql_Core_MVC.SQL.Interfaces;
 
 namespace Api_Crud_Mysql_Core_MVC.Controllers
 {
@@ -7,22 +8,17 @@ namespace Api_Crud_Mysql_Core_MVC.Controllers
     [Route("api/[controller]")]
     public class StockController : Controller
     {
-        [Route("")]
-        [Route("stock")]
-        [Route("stock/Index")]
-        public IActionResult Index()
+        private IDeposito_Computacion_Stock _computacion_stock;
+        public StockController(IDeposito_Computacion_Stock computacion_stock)
         {
-            return View();
+            _computacion_stock = computacion_stock;
         }
 
         // GET api/stock/values
         [HttpGet]
         public ActionResult Get()
-        {
-            CtrlDeposito ctrlDeposito = new CtrlDeposito();
-
-            var lst = ctrlDeposito.Get().ToList();
-
+        {            
+            var lst = _computacion_stock.Get().ToList();
             return Ok(lst);
         }
 
@@ -30,23 +26,18 @@ namespace Api_Crud_Mysql_Core_MVC.Controllers
         [HttpGet("{id}")]
         public ActionResult Get_id(int id)
         {
-            CtrlDeposito ctrlDeposito = new CtrlDeposito();
+            _computacion_stock.Id = id;
 
-            ctrlDeposito.Id = id;
-
-            var result = ctrlDeposito.Get_id().ToList();
+            var result = _computacion_stock.Get_id().ToList();
 
             return Ok(result);
-
         }
 
         // POST api/values
         [HttpPost]
         public ActionResult Post([FromBody] Models.Deposito deposito)
         {
-            CtrlDeposito ctrlDeposito = new CtrlDeposito();
-
-            ctrlDeposito.Post(deposito);
+            _computacion_stock.Post(deposito);
 
             return Ok(true);
         }
@@ -55,9 +46,7 @@ namespace Api_Crud_Mysql_Core_MVC.Controllers
         [HttpPut]
         public ActionResult Put([FromBody] Models.Deposito deposito)
         {
-            CtrlDeposito ctrlDeposito = new CtrlDeposito();
-
-            ctrlDeposito.Put(deposito);
+            _computacion_stock.Put(deposito);
 
             return Ok(true);
         }
@@ -66,9 +55,7 @@ namespace Api_Crud_Mysql_Core_MVC.Controllers
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
-            CtrlDeposito ctrlDeposito = new CtrlDeposito();
-
-            ctrlDeposito.Delete(id);
+            _computacion_stock.Delete(id);
 
             return Ok(true);
         }

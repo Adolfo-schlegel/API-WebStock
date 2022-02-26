@@ -1,5 +1,6 @@
 ﻿using Api_Crud_Mysql_Core_MVC.SQL;
 using Microsoft.AspNetCore.Mvc;
+using Api_Crud_Mysql_Core_MVC.SQL.Interfaces;
 
 namespace Api_Crud_Mysql_Core_MVC.Controllers
 {
@@ -7,29 +8,12 @@ namespace Api_Crud_Mysql_Core_MVC.Controllers
     [Route("api/[controller]")]
     public class RegisterController : Controller
     {
-        [Route("")]
-        [Route("Register")]
-        [Route("Register/Index")]
-        public IActionResult Index()
+        private IRegister _register;
+        public RegisterController(IRegister register)
         {
-            return View();
+            _register = register;
         }
 
-        public CtrlRegister CtrlRegister = new CtrlRegister();
-
-        // GET api/<controller>
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/<controller>/5
-        public string Get(string Email, string password)
-        {
-            return "value";
-        }
-
-        // POST api/<controller>
         [HttpPost]
         public ActionResult Post([FromBody] Models.Register reg)
         {
@@ -37,7 +21,7 @@ namespace Api_Crud_Mysql_Core_MVC.Controllers
             register.Email = reg.Email;
             register.Password = reg.Password;
 
-            int result = CtrlRegister.Create(register);
+            int result = _register.Create(register);
 
             if(result>0)
             {
@@ -48,18 +32,6 @@ namespace Api_Crud_Mysql_Core_MVC.Controllers
                 return BadRequest(400);
             }
             
-        }
-
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody] string value)
-        {
-
-        }
-
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
-
         }
     }
 }

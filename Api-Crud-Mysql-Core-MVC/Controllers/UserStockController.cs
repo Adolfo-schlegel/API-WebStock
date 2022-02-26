@@ -1,15 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Api_Crud_Mysql_Core_MVC.SQL;
 using Api_Crud_Mysql_Core_MVC.Models;
 using Microsoft.AspNetCore.Authorization;
+using Api_Crud_Mysql_Core_MVC.SQL.Interfaces;
 
 namespace Api_Crud_Mysql_Core_MVC.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class UserStockController : BaseController
+    public class UserStockController 
     {
-        CtrlStockUser StockUserSQL = new CtrlStockUser();
+        private IStockUser _stockUser;
+
+        public UserStockController(IStockUser stockUser)
+        {
+            _stockUser = stockUser;
+        }
 
         [HttpPost]
         [Route("Stock")]
@@ -20,7 +25,7 @@ namespace Api_Crud_Mysql_Core_MVC.Controllers
             try
             {
                 oR.message = "OK";
-                oR.data = StockUserSQL.Get(model).ToList();
+                oR.data = _stockUser.Get(model).ToList();
                 oR.result = 1;
 
             }
@@ -35,15 +40,16 @@ namespace Api_Crud_Mysql_Core_MVC.Controllers
             return oR;
         }
 
-        [HttpGet("{id}")]
-        [Route("GetStockId")]
+        [HttpGet("GetStockById/{id}")]        
         public Reply Get_id(int id)
         {
             Reply oR = new Reply();
 
             try
             {
-
+                oR.result = 1;
+                oR.data = _stockUser.GetById(id);
+                oR.message = "OK";
             }
             catch
             {
@@ -63,7 +69,7 @@ namespace Api_Crud_Mysql_Core_MVC.Controllers
             try
             {
                 oR.message="OK";
-                oR.result = StockUserSQL.Post(stock);
+                oR.result = _stockUser.Post(stock);
 
                 if(oR.result != 1)
                 {
@@ -80,13 +86,14 @@ namespace Api_Crud_Mysql_Core_MVC.Controllers
 
         [HttpPut]
         [Route("ModifyStock")]
-        public Reply Put([FromBody] Models.StockUser stockUser)
+        public Reply Put([FromBody] StockUser stockUser)
         {
             Reply oR = new Reply();
 
             try
             {
-
+                oR.result = _stockUser.Put(stockUser);
+                oR.message = "OK";
             }
             catch
             {
@@ -104,7 +111,7 @@ namespace Api_Crud_Mysql_Core_MVC.Controllers
 
             try
             {
-                oR.result = StockUserSQL.Delete(id);
+                oR.result = _stockUser.Delete(id);
                 oR.message = "OK";
 
                 if (oR.result != 1)

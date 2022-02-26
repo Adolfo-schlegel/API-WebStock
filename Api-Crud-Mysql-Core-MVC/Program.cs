@@ -13,6 +13,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
                              
 builder.Services.AddScoped<ILogin, CtrlLogin>();//inyecto mi dependencia para verificar mi correo y contraseña
+builder.Services.AddScoped<IStockUser, CtrlStockUser>();//inyeccion de dependencias para operaciones de varios usuarios con su propio stock
+builder.Services.AddScoped<IRegister, CtrlRegister>();
+builder.Services.AddScoped<IDeposito_Computacion_Stock, CtrlDeposito>();//inyeccion de dependencias para un solo stock 
 builder.Services.AddScoped<IAuth, Auth>();//inyecto mi dependencia para autentificarme, la cual me retorna un token
 
 //configuracion de clase

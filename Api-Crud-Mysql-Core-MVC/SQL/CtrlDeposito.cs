@@ -1,8 +1,9 @@
 ﻿using MySql.Data.MySqlClient;
+using Api_Crud_Mysql_Core_MVC.SQL.Interfaces;
 
 namespace Api_Crud_Mysql_Core_MVC.SQL
 {
-    public class CtrlDeposito : ConnectionMysql.ConnectionToStock
+    public class CtrlDeposito : ConnectionMysql.ConnectionToStock, IDeposito_Computacion_Stock
     {
         int id;
         public int Id { get => id; set => id = value; }
