@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "YiLavP/N0dF8N4+brP2zTu6LERNu30ONMbtVGql/e/M57O9H3+YSdI87pMqew/RN+vFZ7gdLJzhnwzHL1zmTbg==",
+  "dgSpecHash": "sLiNWz2kBDUxS/1h+ee0I/9uH/dlmjEkGtU9DH8wzioRGN83JZp13GEvs9R/JwYsJ7Qj/zorfI5t7ysIc3/DDQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\adolf\\source\\repos\\Api-Crud-Mysql-Core-MVC\\Api-Crud-Mysql-Core-MVC\\Api-Crud-Mysql-Core-MVC.csproj",
   "expectedPackageFiles": [
@@ -19,6 +19,7 @@
     "C:\\Users\\adolf\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\adolf\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
     "C:\\Users\\adolf\\.nuget\\packages\\mysql.data\\8.0.28\\mysql.data.8.0.28.nupkg.sha512",
+    "C:\\Users\\adolf\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\adolf\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
     "C:\\Users\\adolf\\.nuget\\packages\\system.configuration.configurationmanager\\4.4.1\\system.configuration.configurationmanager.4.4.1.nupkg.sha512",
     "C:\\Users\\adolf\\.nuget\\packages\\system.drawing.common\\4.7.0\\system.drawing.common.4.7.0.nupkg.sha512",
