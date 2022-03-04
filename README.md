@@ -1,1 +1,1 @@
-<img src="https://discord.com/channels/703464242241732628/703464242241732631/949435564581605446">
+<img src="https://cdn.discordapp.com/attachments/703464242241732631/949435564191543306/Program.png">
