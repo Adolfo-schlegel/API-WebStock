@@ -4,8 +4,10 @@ namespace Api_Crud_Mysql_Core_MVC.SQL.Interfaces
 {
     public interface IPlanillaCabecera
     {
-        public int Create(Models.PlanillaCabecera model);
+        public int Create(PlanillaCabecera model);
 
-        public List<PlanillaCabecera>? Read(int userId);
+        public List<string>? Read_NamesTables(int userId);
+
+        public List<string>? Read_camp(int userId, string table_name);
     }
 }

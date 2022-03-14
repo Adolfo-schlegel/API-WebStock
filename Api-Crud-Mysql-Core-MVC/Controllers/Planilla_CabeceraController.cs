@@ -16,13 +16,15 @@ namespace Api_Crud_Mysql_Core_MVC.Controllers
         }
 
         [HttpGet]
-        [Route("GetCabecera/{id}")]
-        public Reply Get_by_userid(int id)
+        [Route("GetNames/{id}")]
+        public Reply Get_Names(int id)
         {
             Reply oR = new Reply();
             try
             {
-                oR.data = _planillaCabecera.Read(id);
+                oR.data = _planillaCabecera.Read_NamesTables(id);
+                oR.result = 1;
+                oR.message = "OK";
                 return oR;
             }
             catch
@@ -43,7 +45,7 @@ namespace Api_Crud_Mysql_Core_MVC.Controllers
             {
                 oR.result = _planillaCabecera.Create(model);
 
-                if(oR.result != 1)
+                if (oR.result != 1)
                 {
                     oR.message = "datos erroneos";
                     return oR;
@@ -55,6 +57,31 @@ namespace Api_Crud_Mysql_Core_MVC.Controllers
             catch (Exception ex)
             {
                 oR.message = ex.Message;
+                return oR;
+            }
+        }
+        [HttpGet]
+        [Route("GetColumnsByNameTable/{id}/{table_name}")]
+        public Reply GetColumns(int id, string table_name)
+        {
+            Reply oR = new Reply();
+            try
+            {
+                oR.data = _planillaCabecera.Read_camp(id, table_name);
+
+                if(oR.data == null)
+                {
+                    oR.result = 0;
+                    oR.message = "Error en el servidor";
+                    return oR;
+                }
+                oR.result = 1;
+                oR.message = "OK";
+                return oR;
+            }
+            catch(Exception ex)
+            {
+                oR.message = ex.ToString();
                 return oR;
             }            
         }

@@ -12,12 +12,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
                              
-builder.Services.AddScoped<ILogin, CtrlLogin>();//inyecto mi dependencia para verificar mi correo y contraseña
-builder.Services.AddScoped<IStockUser, CtrlStockUser>();//inyeccion de dependencias para operaciones de varios usuarios con su propio stock
-builder.Services.AddScoped<IRegister, CtrlRegister>();
-builder.Services.AddScoped<IPlanillaCabecera, CtrlPlanillaCabecera>();
-builder.Services.AddScoped<IDeposito_Computacion_Stock, CtrlDeposito>();//inyeccion de dependencias para un solo stock 
-builder.Services.AddScoped<IAuth, Auth>();//inyecto mi dependencia para autentificarme, la cual me retorna un token
+builder.Services.AddScoped<ILogin, CtrlLogin>();// Dependencia para loguear, 
+builder.Services.AddScoped<IStockUser, CtrlStockUser>();//Dependencia para que los usuarios tengan su propo stock privado
+builder.Services.AddScoped<IRegister, CtrlRegister>();// Dependencia para registrarme en la base de datos
+builder.Services.AddScoped<IPlanillaCabecera, CtrlPlanillaCabecera>(); // Dependencia para CRUD de las cabeceras en registros json de la bd
+builder.Services.AddScoped<IDeposito_Computacion_Stock, CtrlDeposito>();// Dependencia para CRUD de una sola tabla global manipulada por cualquier usuario
+builder.Services.AddScoped<IAuth, Auth>();// Dependencia para autentificarme con pass y email, la cual me retorna un token si coinciden
 
 //configuracion de clase
 var appAppSettingsSection = builder.Configuration.GetSection("AppSettings");

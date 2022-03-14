@@ -3,6 +3,7 @@ using Api_Crud_Mysql_Core_MVC.SQL.Interfaces;
 using MySql.Data.MySqlClient;
 using System.Text.Json;
 using Newtonsoft.Json;
+using System.Data;
 
 namespace Api_Crud_Mysql_Core_MVC.SQL
 {
@@ -11,17 +12,18 @@ namespace Api_Crud_Mysql_Core_MVC.SQL
         string query = "";
         MySqlConnection connection = connect();
         MySqlCommand? command;
-        MySqlDataReader reader;
+        MySqlDataReader? reader;
         public int Create(PlanillaCabecera model)
         {
             try
             {
-                object contentJson = JsonConvert.DeserializeObject(model.Campos_Json.ToString());
+                object ColJson = JsonConvert.DeserializeObject(model.Campos_Json.ToString());           
+                List<string> content = JsonConvert.DeserializeObject<List<string>>(ColJson.ToString());
 
-                List<string> content = JsonConvert.DeserializeObject<List<string>>(contentJson.ToString());
+                var planilla_cabecera = new {Col = content};
 
-                //string arrayJson = JsonConvert.SerializeObject(content);
-                string jsonString = System.Text.Json.JsonSerializer.Serialize(content);
+                //string arrayJson = JsonConvert.SerializeObject(content);  
+                string jsonString = System.Text.Json.JsonSerializer.Serialize(planilla_cabecera);
 
                 query = "insert into planilla_cabecera (Nombre_tabla, Campos_Json, user_id)" +
                     "Values ('" + model.Nombre_tabla + "', '" + jsonString + "', '" + model.user_id + "')";
@@ -36,10 +38,25 @@ namespace Api_Crud_Mysql_Core_MVC.SQL
                 return 0;
             }
         }
-        public List<PlanillaCabecera>? Read(int userId)
+        public List<string>? Read_NamesTables(int userId)
         {
-            List<PlanillaCabecera> lsCabecera = new List<PlanillaCabecera>();
-            query = "SELECT * FROM planilla_cabecera Where user_id = '"+userId+"';";
+            List<string> lsnames = new List<string>();
+            query = "SELECT * FROM planilla_cabecera Where user_id = '"+userId+"' ;";
+            command = new MySqlCommand(query, connection);
+            reader = command.ExecuteReader();
+
+            if (reader.HasRows)
+            {
+                while (reader.Read())                                    
+                    lsnames.Add(reader.GetString(1));                
+                return lsnames;
+            }
+            return null;
+        }
+        public List<string>? Read_camp(int userId, string table_name)
+        {
+            List<string> lsCabecera = new List<string>();
+            query = "SELECT JSON_EXTRACT(Campos_json, '$.Col') From Planilla_cabecera Where user_id = '" + userId + "' and Nombre_tabla = '"+table_name+"';";
             command = new MySqlCommand(query, connection);
             reader = command.ExecuteReader();
 
@@ -47,15 +64,10 @@ namespace Api_Crud_Mysql_Core_MVC.SQL
             {
                 while (reader.Read())
                 {
-                    PlanillaCabecera oCabecera = new PlanillaCabecera();
+                    var collection = JsonConvert.DeserializeObject(reader.GetString(0));
 
-                    oCabecera.id = reader.GetInt32(0);
-                    oCabecera.Nombre_tabla = reader.GetString(1);
-                    oCabecera.Campos_Json = reader.GetString(2);
-
-                    lsCabecera.Add(oCabecera);
+                    lsCabecera = System.Text.Json.JsonSerializer.Deserialize<List<string>>(collection.ToString());
                 }
-
                 return lsCabecera;
             }
 
