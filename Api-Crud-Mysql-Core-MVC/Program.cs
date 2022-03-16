@@ -18,6 +18,7 @@ builder.Services.AddScoped<IRegister, CtrlRegister>();// Dependencia para regist
 builder.Services.AddScoped<IPlanillaCabecera, CtrlPlanillaCabecera>(); // Dependencia para CRUD de las cabeceras en registros json de la bd
 builder.Services.AddScoped<IDeposito_Computacion_Stock, CtrlDeposito>();// Dependencia para CRUD de una sola tabla global manipulada por cualquier usuario
 builder.Services.AddScoped<IAuth, Auth>();// Dependencia para autentificarme con pass y email, la cual me retorna un token si coinciden
+builder.Services.AddScoped<IPlanillaRegistros, CtrlPlanillaRegistros>();
 
 //configuracion de clase
 var appAppSettingsSection = builder.Configuration.GetSection("AppSettings");

@@ -53,22 +53,23 @@ namespace Api_Crud_Mysql_Core_MVC.SQL
             }
             return null;
         }
-        public List<string>? Read_camp(int userId, string table_name)
+        public PlanillaCabecera? Read_camp(int userId, string table_name)
         {
-            List<string> lsCabecera = new List<string>();
-            query = "SELECT JSON_EXTRACT(Campos_json, '$.Col') From Planilla_cabecera Where user_id = '" + userId + "' and Nombre_tabla = '"+table_name+"';";
+            PlanillaCabecera cabecera = new PlanillaCabecera();
+
+            query = "SELECT id, JSON_EXTRACT(Campos_json, '$.Col') From Planilla_cabecera Where user_id = '" + userId + "' and Nombre_tabla = '"+table_name+"';";
             command = new MySqlCommand(query, connection);
             reader = command.ExecuteReader();
 
             if (reader.HasRows)
             {
                 while (reader.Read())
-                {
-                    var collection = JsonConvert.DeserializeObject(reader.GetString(0));
-
-                    lsCabecera = System.Text.Json.JsonSerializer.Deserialize<List<string>>(collection.ToString());
+                {                                        
+                    cabecera.id = reader.GetInt32(0);
+                    var collection = JsonConvert.DeserializeObject(reader.GetString(1));
+                    cabecera.Campos_Json = System.Text.Json.JsonSerializer.Deserialize<List<string>>(collection.ToString());                    
                 }
-                return lsCabecera;
+                return cabecera;
             }
 
             return null;

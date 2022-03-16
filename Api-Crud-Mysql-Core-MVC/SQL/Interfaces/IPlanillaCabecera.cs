@@ -8,6 +8,6 @@ namespace Api_Crud_Mysql_Core_MVC.SQL.Interfaces
 
         public List<string>? Read_NamesTables(int userId);
 
-        public List<string>? Read_camp(int userId, string table_name);
+        public PlanillaCabecera Read_camp(int userId, string table_name);
     }
 }

@@ -3,7 +3,7 @@
     public class PlanillaCabecera
     {
         public string? Nombre_tabla { get; set; }        
-        public object? Campos_Json { get; set; }
+        public List<string>? Campos_Json { get; set; }
         public int user_id { get; set; }
         public int id { get; set; }
     }

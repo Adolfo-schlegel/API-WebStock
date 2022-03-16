@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
 
-        public object? Registros_Json { get; set; }
+        public List<string>? Registros_Json { get; set; }
 
         public int cabecera_id { get; set; }
     }
