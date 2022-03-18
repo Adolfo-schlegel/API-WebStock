@@ -17,12 +17,8 @@ namespace Api_Crud_Mysql_Core_MVC.SQL
         {
             try
             {
-                object ColJson = JsonConvert.DeserializeObject(model.Campos_Json.ToString());           
-                List<string> content = JsonConvert.DeserializeObject<List<string>>(ColJson.ToString());
-
-                var planilla_cabecera = new {Col = content};
-
-                //string arrayJson = JsonConvert.SerializeObject(content);  
+                var planilla_cabecera = new {Col = model.Campos_Json};
+ 
                 string jsonString = System.Text.Json.JsonSerializer.Serialize(planilla_cabecera);
 
                 query = "insert into planilla_cabecera (Nombre_tabla, Campos_Json, user_id)" +

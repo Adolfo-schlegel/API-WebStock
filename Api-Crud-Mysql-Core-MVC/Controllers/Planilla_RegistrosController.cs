@@ -9,7 +9,7 @@ namespace Api_Crud_Mysql_Core_MVC.Controllers
     public class Planilla_RegistrosController : Controller
     {
         IPlanillaRegistros _PlanillaRegistros;
-        
+
         public Planilla_RegistrosController(IPlanillaRegistros planillaRegistros)
         {
             _PlanillaRegistros = planillaRegistros;
@@ -24,12 +24,12 @@ namespace Api_Crud_Mysql_Core_MVC.Controllers
             {
                 oR.data = _PlanillaRegistros.Read(cabecera_id);
 
-                if(oR.data == null)
+                if (oR.data == null)
                 {
                     oR.message = "Datos Erroneos";
                 }
                 oR.message = "OK";
-                oR.result = 1;                
+                oR.result = 1;
                 return oR;
             }
             catch (Exception ex)
@@ -46,7 +46,7 @@ namespace Api_Crud_Mysql_Core_MVC.Controllers
             try
             {
                 oR.data = _PlanillaRegistros.ReadById(id);
-                if(oR.data == null)
+                if (oR.data == null)
                 {
                     oR.message = "Error en el servidor";
                     return oR;
@@ -55,25 +55,26 @@ namespace Api_Crud_Mysql_Core_MVC.Controllers
                 oR.result = 1;
                 return oR;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 oR.message = ex.Message;
                 return oR;
             }
         }
-        public Reply Post()
+        [HttpPost]
+        [Route("PostStock")]
+        public Reply Post([FromBody]PlanillaRegistros model)
         {
             Reply oR = new();           
             try
             {
-                // oR.data = _PlanillaRegistros.Create
-                if(oR.data == null)
+                oR.result = _PlanillaRegistros.Create(model);
+                if(oR.result != 1)
                 {
                     oR.message = "Error en el servidor";
                     return oR;
                 }
                 oR.message = "OK";
-                oR.result=1;
                 return oR;
             }
             catch (Exception ex)

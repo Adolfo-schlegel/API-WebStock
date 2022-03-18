@@ -1,10 +1,11 @@
 ﻿using Api_Crud_Mysql_Core_MVC.Models;
+using Api_Crud_Mysql_Core_MVC.SQL.Interfaces;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 
 namespace Api_Crud_Mysql_Core_MVC.SQL
 {
-    public class CtrlPlanillaRegistros : ConnectionMysql.ConnectionToStocksWeb
+    public class CtrlPlanillaRegistros : ConnectionMysql.ConnectionToStocksWeb, IPlanillaRegistros
     {
         string query = "";
         MySqlConnection connection = connect();
@@ -14,7 +15,7 @@ namespace Api_Crud_Mysql_Core_MVC.SQL
         public List<PlanillaRegistros>? Read(int cabecera_id)
         {
             List<PlanillaRegistros> lst = new List<PlanillaRegistros>();
-            query = "Select * from stock_web.planilla_registros where cabecera_id = " + cabecera_id;
+            query = "Select id, JSON_EXTRACT(Registros_json, '$.Reg'), cabecera_id from stock_web.planilla_registros where cabecera_id = " + cabecera_id;
             command = new MySqlCommand(query, connection);
             reader = command.ExecuteReader();
 
@@ -28,13 +29,13 @@ namespace Api_Crud_Mysql_Core_MVC.SQL
                     var collection = JsonConvert.DeserializeObject(reader.GetString(1));
                     planillaRegistros.Registros_Json = JsonConvert.DeserializeObject<List<string>>(collection.ToString());
 
-                    planillaRegistros.cabecera_id = reader.GetInt32(3);
+                    planillaRegistros.cabecera_id = reader.GetInt32(2);
 
                     lst.Add(planillaRegistros);
                 }
                 return lst;
             }
-            return null;
+            return new List<PlanillaRegistros>();
         }
 
         public List<PlanillaRegistros>? ReadById(int cabecera_id)
@@ -63,6 +64,25 @@ namespace Api_Crud_Mysql_Core_MVC.SQL
                 return lst;
             }
             return null;
+        }
+        public int Create(PlanillaRegistros model)
+        {
+            try
+            {
+                var planilla_Registro = new { Reg = model.Registros_Json };
+
+                string jsonString = System.Text.Json.JsonSerializer.Serialize(planilla_Registro);
+
+                query = "Insert Into planilla_registros (cabecera_id, Registros_Json) Values ('" + model.cabecera_id + "', '" + jsonString + "' )";
+                command = new MySqlCommand(query, connection);
+                int result = command.ExecuteNonQuery();
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
         }
     }   
 }

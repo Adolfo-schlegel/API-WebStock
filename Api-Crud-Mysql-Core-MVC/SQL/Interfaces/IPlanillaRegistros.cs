@@ -6,5 +6,6 @@ namespace Api_Crud_Mysql_Core_MVC.SQL.Interfaces
     {
         public List<PlanillaRegistros>? Read(int cabecera_id);
         public List<PlanillaRegistros>? ReadById(int cabecera_id);
+        public int Create(PlanillaRegistros registros);
     }
 }
