@@ -39,7 +39,7 @@ namespace Api_Crud_Mysql_Core_MVC.Controllers
             }
         }
         [HttpGet]
-        [Route("GetStockById/{id}")]
+        [Route("GetById/{id}")]
         public Reply GetById(int id)
         {
             Reply oR = new();

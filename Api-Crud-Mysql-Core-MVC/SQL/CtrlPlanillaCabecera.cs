@@ -49,6 +49,20 @@ namespace Api_Crud_Mysql_Core_MVC.SQL
             }
             return null;
         }
+        public string ReadNamePlanillaByid(int id)
+        {
+            query = "SELECT Nombre_tabla From planilla_cabecera WHERE id = " + id;
+            command = new MySqlCommand(query, connection);
+            reader = command.ExecuteReader();
+
+            if(reader.HasRows)
+            {
+                while(reader.Read())
+                    return reader.GetString(0);
+            }
+            return null;
+        }
+
         public PlanillaCabecera? Read_camp(int userId, string table_name)
         {
             PlanillaCabecera cabecera = new PlanillaCabecera();
@@ -67,7 +81,6 @@ namespace Api_Crud_Mysql_Core_MVC.SQL
                 }
                 return cabecera;
             }
-
             return null;
         }
     }

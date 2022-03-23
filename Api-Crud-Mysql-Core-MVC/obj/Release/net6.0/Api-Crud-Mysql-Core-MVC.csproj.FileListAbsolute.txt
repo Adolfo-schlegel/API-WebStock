@@ -5,7 +5,6 @@ C:\Users\adolf\source\repos\Api-Crud-Mysql-Core-MVC\Api-Crud-Mysql-Core-MVC\bin\
 C:\Users\adolf\source\repos\Api-Crud-Mysql-Core-MVC\Api-Crud-Mysql-Core-MVC\bin\Release\net6.0\Api-Crud-Mysql-Core-MVC.deps.json
 C:\Users\adolf\source\repos\Api-Crud-Mysql-Core-MVC\Api-Crud-Mysql-Core-MVC\bin\Release\net6.0\Api-Crud-Mysql-Core-MVC.runtimeconfig.json
 C:\Users\adolf\source\repos\Api-Crud-Mysql-Core-MVC\Api-Crud-Mysql-Core-MVC\bin\Release\net6.0\Api-Crud-Mysql-Core-MVC.dll
-C:\Users\adolf\source\repos\Api-Crud-Mysql-Core-MVC\Api-Crud-Mysql-Core-MVC\bin\Release\net6.0\ref\Api-Crud-Mysql-Core-MVC.dll
 C:\Users\adolf\source\repos\Api-Crud-Mysql-Core-MVC\Api-Crud-Mysql-Core-MVC\bin\Release\net6.0\Api-Crud-Mysql-Core-MVC.pdb
 C:\Users\adolf\source\repos\Api-Crud-Mysql-Core-MVC\Api-Crud-Mysql-Core-MVC\bin\Release\net6.0\BouncyCastle.Crypto.dll
 C:\Users\adolf\source\repos\Api-Crud-Mysql-Core-MVC\Api-Crud-Mysql-Core-MVC\bin\Release\net6.0\Google.Protobuf.dll
@@ -51,3 +50,5 @@ C:\Users\adolf\source\repos\Api-Crud-Mysql-Core-MVC\Api-Crud-Mysql-Core-MVC\bin\
 C:\Users\adolf\source\repos\Api-Crud-Mysql-Core-MVC\Api-Crud-Mysql-Core-MVC\bin\Release\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\adolf\source\repos\Api-Crud-Mysql-Core-MVC\Api-Crud-Mysql-Core-MVC\bin\Release\net6.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\adolf\source\repos\Api-Crud-Mysql-Core-MVC\Api-Crud-Mysql-Core-MVC\bin\Release\net6.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\adolf\source\repos\Api-Crud-Mysql-Core-MVC\Api-Crud-Mysql-Core-MVC\bin\Release\net6.0\Newtonsoft.Json.dll
+C:\Users\adolf\source\repos\Api-Crud-Mysql-Core-MVC\Api-Crud-Mysql-Core-MVC\obj\Release\net6.0\refint\Api-Crud-Mysql-Core-MVC.dll

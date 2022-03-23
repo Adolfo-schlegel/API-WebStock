@@ -38,7 +38,7 @@ namespace Api_Crud_Mysql_Core_MVC.SQL
             return new List<PlanillaRegistros>();
         }
 
-        public List<PlanillaRegistros>? ReadById(int cabecera_id)
+        public List<PlanillaRegistros>? ReadById(int cabecera_id)//creo que era por id del registro
         {
             List<PlanillaRegistros> lst = new ();
             query = "SELECT * FROM stock_web.planilla_registros WHERE cabecera_id = " + cabecera_id;
