@@ -28,6 +28,7 @@ namespace Api_Crud_Mysql_Core_MVC.Controllers
                 {
                     oR.message = "Datos Erroneos";
                 }
+
                 oR.message = "OK";
                 oR.result = 1;
                 return oR;
@@ -39,7 +40,7 @@ namespace Api_Crud_Mysql_Core_MVC.Controllers
             }
         }
         [HttpGet]
-        [Route("GetById/{id}")]
+        [Route("GetStockItem/{id}")]
         public Reply GetById(int id)
         {
             Reply oR = new();
@@ -83,13 +84,14 @@ namespace Api_Crud_Mysql_Core_MVC.Controllers
                 return oR;
             }
         }
-
-        public Reply Put()
+        [HttpPut]
+        [Route("UpdateStock")]
+        public Reply Put([FromBody] PlanillaRegistros model)
         {
             Reply oR = new();
             try
             {
-                // oR.data = _PlanillaRegistros.Update
+                oR.data = _PlanillaRegistros.Update(model);
                 if (oR.data == null)
                 {
                     oR.message = "Error en el servidor";
@@ -106,19 +108,20 @@ namespace Api_Crud_Mysql_Core_MVC.Controllers
             }
         }
 
-        public Reply Delete()
+        [HttpDelete]
+        [Route("DeleteStockById/{id}")]
+        public Reply Delete(int id)
         {
             Reply oR = new();
             try
             {
-                // oR.data = _PlanillaRegistros.Delete
-                if (oR.data == null)
+                oR.result = _PlanillaRegistros.Delete(id);
+                if (oR.result != 1)
                 {
                     oR.message = "Error en el servidor";
                     return oR;
                 }
                 oR.message = "OK";
-                oR.result = 1;
                 return oR;
             }
             catch (Exception ex)
